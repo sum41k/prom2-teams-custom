@@ -1,0 +1,29 @@
+# Default values for prom2teams.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: idealista/prom2teams
+  tag: 2.5.2
+  pullPolicy: IfNotPresent
+
+resources:
+ requests:
+   cpu: 100m
+   memory: 128Mi
+ limits:
+   cpu: 200m
+   memory: 200Mi
+
+service:
+  type: ClusterIP
+  port: 8089
+
+prom2teams:
+  host: 0.0.0.0
+  port: 8089
+  connector: "https://outlook.office.com/webhook/f7400d3a-167d-42aa-80e4-caa552aa1075@b41b72d0-4e9f-4c26-8a69-f949f367c91d/IncomingWebhook/12aea3eb5d2c4e73b7deef15075672f9/9a167cbc-c4b8-44bc-9390-fbcd056e1218"
+  group_alerts_by: alertname
+  loglevel: INFO
+  templatepath: /opt/prom2teams/helmconfig/teams.j2
+  config: /opt/prom2teams/helmconfig/config.ini
